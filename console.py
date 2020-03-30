@@ -44,6 +44,13 @@ class HBNBCommand(cmd.Cmd):
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
             obj.save()
+            for i in range(1, len(my_list)):
+                my_key = my_list[i].split("=")
+                if "_" in my_key[1]:
+                    my_key[1] = my_key[1].replace("_", " ")
+                arg_u = my_list[0] + " " + obj.id + " " + my_key[0] + \
+                    " " + my_key[1]
+                HBNBCommand.do_update(self, arg_u)
             print("{}".format(obj.id))
         except SyntaxError:
             print("** class name missing **")
