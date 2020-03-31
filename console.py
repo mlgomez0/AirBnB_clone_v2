@@ -46,12 +46,10 @@ class HBNBCommand(cmd.Cmd):
             obj = eval("{}()".format(my_list[0]))
             for i in range(1, len(my_list)):
                 my_key = my_list[i].split("=")
-                try:
+                if "_" in my_key[1]:
+                    my_key[1] = my_key[1].replace("_", " ")
+                else:
                     my_key[1] = eval(my_key[1])
-                except Exception:
-                    if "_" in my_key[1]:
-                        my_key[1] = my_key[1].replace("_", " ")
-                    my_key[1] = my_key[1]
                 setattr(obj, my_key[0], my_key[1])
             obj.save()
             print("{}".format(obj.id))
