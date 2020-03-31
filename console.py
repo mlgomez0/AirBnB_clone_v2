@@ -136,6 +136,8 @@ class HBNBCommand(cmd.Cmd):
         my_list = []
         if not line:
             for key in objects:
+                if '_sa_instance_state' in objects[key].__dict__:
+                    del objects[key].__dict__['_sa_instance_state']
                 my_list.append(objects[key])
             print(my_list)
             return
@@ -144,6 +146,8 @@ class HBNBCommand(cmd.Cmd):
             if args[0] not in self.all_classes:
                 raise NameError()
             for key in objects:
+                if '_sa_instance_state' in objects[key].__dict__:
+                    del objects[key].__dict__['_sa_instance_state']
                 name = key.split('.')
                 if name[0] == args[0]:
                     my_list.append(objects[key])

@@ -30,7 +30,6 @@ class DBStorage:
     def all(self, cls=None):
         class_list = [State, User, Place, City]
         all_dict = {}
-        print(cls is None)
         if cls is not None:
             class_obj = eval(cls)
             for item in self.__session.query(class_obj):
