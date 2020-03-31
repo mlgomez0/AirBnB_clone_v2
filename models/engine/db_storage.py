@@ -7,8 +7,9 @@ from sqlalchemy import MetaData
 import os
 from models.base_model import Base
 from models.state import State
-from models.city import  City
-from models.user import  User
+from models.city import City
+from models.user import User
+from models.place import Place
 
 
 class DBStorage:
@@ -16,16 +17,15 @@ class DBStorage:
     __engine = None
     __session = None
 
-
     def __init__(self):
         user = os.getenv('HBNB_MYSQL_USER')
         passwd = os.getenv('HBNB_MYSQL_PWD')
         host = os.getenv('HBNB_MYSQL_HOST')
         db = os.getenv('HBNB_MYSQL_DB')
-        DBStorage.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(user, passwd, host, db), pool_pre_ping=True)
+        d_sql = 'mysql+mysqldb://{}:{}@{}/{}'.format(user, passwd, host, db)
+        DBStorage.__engine = create_engine(d_sql, pool_pre_ping=True)
         if user == 'test':
             Base.metadata.drop_all(DBStorage.__engine)
-
 
     def all(self, cls=None):
         all_dict = {}
