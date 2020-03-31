@@ -6,6 +6,8 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import MetaData
 import os
 from models.base_model import Base
+from models.state import State
+from models.city import  City
 
 
 class DBStorage:
@@ -26,11 +28,13 @@ class DBStorage:
 
     def all(self, cls=None):
         all_dict = {}
+        class_obj = eval(cls)
         if cls is not None:
-            for item in self.__session.query(cls.__name__):
-                all_dict[cls.__name__ + "." + item.id] = item
+            for item in self.__session.query(class_obj):
+                del item.__dict__['_sa_instance_state']
+                all_dict[cls + "." + item.id] = item
         else:
-            for table in metadata.tables.keys():
+            for table in DBStorage.__engine.table_names():
                 for item in self.__session.query(table):
                     all_dict[table + "." + item.id] = item
         return all_dict
