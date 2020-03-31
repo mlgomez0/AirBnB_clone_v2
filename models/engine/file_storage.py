@@ -69,3 +69,9 @@ class FileStorage:
         if obj is not None:
             name = obj.__class__.__name__ + "." + obj.id
             del(FileStorage.__objects[name])
+
+    @property
+    def cities(self):
+        """returns the list of City instances
+        """
+        return self.cities
