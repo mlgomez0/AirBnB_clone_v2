@@ -75,3 +75,10 @@ class FileStorage:
         """returns the list of City instances
         """
         return self.cities
+
+    @property
+    def reviews(self):
+        """
+           returns a list of Review instances
+        """
+        return self.reviews
