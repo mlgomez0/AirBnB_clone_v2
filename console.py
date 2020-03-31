@@ -126,7 +126,13 @@ class HBNBCommand(cmd.Cmd):
         Exceptions:
             NameError: when there is no object taht has the name
         """
-        objects = storage.all(line)
+        if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+            if not line:
+                objects = storage.all(None)
+            else:
+                objects = storage.all(line)
+        else:
+            objects = storage.all()
         my_list = []
         if not line:
             for key in objects:

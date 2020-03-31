@@ -28,16 +28,19 @@ class DBStorage:
             Base.metadata.drop_all(DBStorage.__engine)
 
     def all(self, cls=None):
+        class_list = [State, User, Place, City]
         all_dict = {}
-        class_obj = eval(cls)
+        print(cls is None)
         if cls is not None:
+            class_obj = eval(cls)
             for item in self.__session.query(class_obj):
                 del item.__dict__['_sa_instance_state']
                 all_dict[cls + "." + item.id] = item
         else:
-            for table in DBStorage.__engine.table_names():
+            for table in class_list:
                 for item in self.__session.query(table):
-                    all_dict[table + "." + item.id] = item
+                    del item.__dict__['_sa_instance_state']
+                    all_dict[table.__class__.__name__ + "." + item.id] = item
         return all_dict
 
     def new(self, obj):
