@@ -33,6 +33,7 @@ class FileStorage:
             return new_dict
         return self.__objects
 
+
     def new(self, obj):
         """sets __object to given obj
         Args:
@@ -82,3 +83,20 @@ class FileStorage:
            returns a list of Review instances
         """
         return self.reviews
+
+    @property
+    def amenities(self):
+        """
+           return a list of Amenities instances
+        """
+        return self.amenities
+
+    @amenities.setter
+    def amenities(self, value):
+        """
+            add and amenity_id based on a given Amenity.id
+        """
+        if self.__class__.__name__ == "Amenity":
+            self.amenity_ids.append(value)
+
+

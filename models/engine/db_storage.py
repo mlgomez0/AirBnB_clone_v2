@@ -11,6 +11,7 @@ from models.city import City
 from models.user import User
 from models.place import Place
 from models.review import Review
+from models.amenity import Amenity
 
 
 class DBStorage:
@@ -29,7 +30,7 @@ class DBStorage:
             Base.metadata.drop_all(DBStorage.__engine)
 
     def all(self, cls=None):
-        class_list = [State, User, Place, City]
+        class_list = [State, User, Place, City, Amenity, Review]
         all_dict = {}
         if cls is not None:
             class_obj = eval(cls)
