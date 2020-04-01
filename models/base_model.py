@@ -37,7 +37,7 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                if key != "__class__" and key != "_sa_instance_state":
+                if key != "__class__":
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
@@ -48,8 +48,6 @@ class BaseModel:
         Return:
             returns a string of class name, id, and dictionary
         """
-        if '_sa_instance_state' in self.__dict__.keys():
-            del self.__dict__['_sa_instance_state']
         return "[{}] ({}) {}".format(
             type(self).__name__, self.id, self.__dict__)
 
