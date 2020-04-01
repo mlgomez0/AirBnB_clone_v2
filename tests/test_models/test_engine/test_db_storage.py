@@ -16,6 +16,7 @@ class TestDbStorage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """set up for test"""
+
         cls.db = MySQLdb.connect(
             user=os.getenv('HBNB_MYSQL_USER'),
             passwd=os.getenv('HBNB_MYSQL_PWD'),
@@ -25,4 +26,4 @@ class TestDbStorage(unittest.TestCase):
 
     def test_query_all(self):
         expec = self.cur.execute("SELECT COUNT(id) FROM states ORDER BY id ASC")
-        self.assertEqual(1, expec)
+        self.assertEqual(0, expec)

@@ -48,6 +48,8 @@ class HBNBCommand(cmd.Cmd):
                 my_key = my_list[i].split("=")
                 if "_" in my_key[1]:
                     my_key[1] = my_key[1].replace("_", " ")
+                if '"' in my_key[1]:
+                    my_key[1] = my_key[1].replace('"', "")
                 else:
                     my_key[1] = eval(my_key[1])
                 setattr(obj, my_key[0], my_key[1])
