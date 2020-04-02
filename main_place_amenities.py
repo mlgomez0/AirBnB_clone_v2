@@ -12,6 +12,10 @@ state.save()
 city = City(state_id=state.id, name="San Francisco")
 print(city)
 city.save()
+print("==============Lista===================================")
+print(state.cities)
+print("=================================================")
+print(len(state.cities))
 
 # creation of a User
 user = User(email="john@snow.com", password="johnpwd")

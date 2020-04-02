@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship, backref
 import os
 import models
 
+
 class State(BaseModel, Base):
     """This is the class for State
     Attributes:

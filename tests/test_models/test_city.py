@@ -10,7 +10,6 @@ from models.amenity import Amenity
 from models.state import State
 from models.review import Review
 import models
-import MySQLdb
 
 class Testcity(unittest.TestCase):
     """ unittest for City class"""
@@ -49,7 +48,5 @@ class Testcity(unittest.TestCase):
             my_city = City(name="Arizona", state_id=my_state.id)
             my_city.save()
             self.assertEqual(value_a + 1, len(models.storage.all("City")))
-
-
-
-
+            models.storage.delete(my_city)
+            self.assertEqual(value_a, len(models.storage.all("City")))
