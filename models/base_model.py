@@ -2,6 +2,7 @@
 """This is the base model class for AirBnB"""
 import uuid
 import models
+import os
 from datetime import datetime
 import sqlalchemy
 from sqlalchemy import Column, Integer, DateTime, String
@@ -48,8 +49,10 @@ class BaseModel:
         Return:
             returns a string of class name, id, and dictionary
         """
-        return "[{}] ({}) {}".format(
-            type(self).__name__, self.id, self.__dict__)
+        if '_sa_instance_state' in self.__dict__:
+            del self.__dict__['_sa_instance_state']
+            return "[{}] ({}) {}".format(
+                type(self).__name__, self.id, self.__dict__)
 
     def __repr__(self):
         """return a string representaion
@@ -70,7 +73,7 @@ class BaseModel:
         """
         my_dict = dict(self.__dict__)
         if '_sa_instance_state' in my_dict.keys():
-            del(my_dict['_sa_instance_state'])
+            del my_dict['_sa_instance_state']
         my_dict["__class__"] = str(type(self).__name__)
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
