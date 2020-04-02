@@ -35,14 +35,10 @@ class DBStorage:
         if cls is not None:
             class_obj = eval(cls)
             for item in self.__session.query(class_obj):
-                if '_sa_instance_state' in item.__dict__.keys():
-                    del item.__dict__['_sa_instance_state']
                 all_dict[cls + "." + item.id] = item
         else:
             for table in class_list:
                 for item in self.__session.query(table):
-                    if '_sa_instance_state' in item.__dict__.keys():
-                        del item.__dict__['_sa_instance_state']
                     all_dict[table.__class__.__name__ + "." + item.id] = item
         return all_dict
 
