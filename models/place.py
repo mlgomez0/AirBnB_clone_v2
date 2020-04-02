@@ -74,8 +74,8 @@ class Place(BaseModel, Base):
             obj_l = []
             ints = storage.all()
             for k, v in ints.items():
-                if k.split(".")[0] == "Amenity" and
-                k.split(".")[1] in self.amenity_ids:
+                if k.split(".")[0] == "Amenity" and\
+                        k.split(".")[1] in self.amenity_ids:
                     obj_l.append(v)
             return obj_l
 
