@@ -5,6 +5,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship, backref
 from models.city import City
 from models.user import User
+import os
 
 metadata = Base.metadata
 
@@ -29,9 +30,11 @@ class Place(BaseModel, Base):
     place_amenity = Table(
         'place_amenity',
         metadata,
-        Column('place_id', String(60), ForeignKey('places.id'), nullable=False),
         Column(
-            'amenity_id', String(60), ForeignKey('amenities.id'), nullable=False),
+            'place_id', String(60), ForeignKey('places.id'), nullable=False),
+        Column(
+            'amenity_id',
+            String(60), ForeignKey('amenities.id'), nullable=False),
     )
     city_id = Column(String(60), ForeignKey(City.id), nullable=False)
     user_id = Column(String(60), ForeignKey(User.id), nullable=False)
@@ -44,8 +47,42 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     amenity_ids = []
-    reviews = relationship("Review", backref='place')
-    amenities = relationship(
-        "Amenity",
-        secondary=place_amenity, viewonly=False,
-        back_populates="place_amenities")
+    if os.getenv("HBNB_TYPE_STORAGE") == "db":
+        reviews = relationship("Review", backref='place')
+        amenities = relationship(
+            "Amenity",
+            secondary=place_amenity, viewonly=False,
+            back_populates="place_amenities")
+    else:
+        @property
+        def reviews(self):
+            """
+                returns a list of Review instances
+            """
+            obj_l = []
+            ints = storage.all()
+            for k, v in ints.items():
+                if k.split(".")[0] == "Review" and v.place_id == self.id:
+                    obj_l.append(v)
+            return obj_l
+
+        @property
+        def amenities(self):
+            """
+                return a list of Amenities instances
+            """
+            obj_l = []
+            ints = storage.all()
+            for k, v in ints.items():
+                if k.split(".")[0] == "Amenity" and
+                k.split(".")[1] in self.amenity_ids:
+                    obj_l.append(v)
+            return obj_l
+
+        @amenities.setter
+        def amenities(self, value):
+            """
+                add and amenity_id based on a given Amenity.id
+            """
+            if value.__class__.__name__ == "Amenity":
+                self.amenity_ids.append(value.id)

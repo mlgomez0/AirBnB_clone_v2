@@ -33,7 +33,6 @@ class FileStorage:
             return new_dict
         return self.__objects
 
-
     def new(self, obj):
         """sets __object to given obj
         Args:
@@ -53,7 +52,8 @@ class FileStorage:
             json.dump(my_dict, f)
 
     def reload(self):
-        """serialize the file path to JSON file path
+        """
+            serialize the file path to JSON file path
         """
         try:
             with open(self.__file_path, 'r', encoding="UTF-8") as f:
@@ -70,33 +70,3 @@ class FileStorage:
         if obj is not None:
             name = obj.__class__.__name__ + "." + obj.id
             del(FileStorage.__objects[name])
-
-    @property
-    def cities(self):
-        """returns the list of City instances
-        """
-        return self.cities
-
-    @property
-    def reviews(self):
-        """
-           returns a list of Review instances
-        """
-        return self.reviews
-
-    @property
-    def amenities(self):
-        """
-           return a list of Amenities instances
-        """
-        return self.amenities
-
-    @amenities.setter
-    def amenities(self, value):
-        """
-            add and amenity_id based on a given Amenity.id
-        """
-        if self.__class__.__name__ == "Amenity":
-            self.amenity_ids.append(value)
-
-
