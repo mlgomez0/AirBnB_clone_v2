@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship, backref
 from models.city import City
 from models.user import User
 import os
+import models
 
 metadata = Base.metadata
 
@@ -60,7 +61,7 @@ class Place(BaseModel, Base):
                 returns a list of Review instances
             """
             obj_l = []
-            ints = storage.all()
+            ints = models.storage.all()
             for k, v in ints.items():
                 if k.split(".")[0] == "Review" and v.place_id == self.id:
                     obj_l.append(v)
@@ -72,7 +73,7 @@ class Place(BaseModel, Base):
                 return a list of Amenities instances
             """
             obj_l = []
-            ints = storage.all()
+            ints = models.storage.all()
             for k, v in ints.items():
                 if k.split(".")[0] == "Amenity" and\
                         k.split(".")[1] in self.amenity_ids:

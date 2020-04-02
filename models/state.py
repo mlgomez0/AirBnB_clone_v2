@@ -4,7 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, backref
 import os
-
+import models
 
 class State(BaseModel, Base):
     """This is the class for State
@@ -22,7 +22,7 @@ class State(BaseModel, Base):
             """returns the list of City instances
             """
             obj_l = []
-            ints = storage.all()
+            ints = models.storage.all()
             for k, v in ints.items():
                 if k.split(".")[0] == "City" and v.state_id == self.id:
                     obj_l.append(v)
