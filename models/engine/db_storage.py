@@ -27,7 +27,7 @@ class DBStorage:
         d_sql = 'mysql+mysqldb://{}:{}@{}/{}'.format(user, passwd, host, db)
         DBStorage.__engine = create_engine(d_sql, pool_pre_ping=True)
         if os.getenv('HBNB_ENV') == 'test':
-            Base.metadata.drop_all(DBStorage.__engine)
+            Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
         class_list = [User, State, City, Amenity, Place, Review]
