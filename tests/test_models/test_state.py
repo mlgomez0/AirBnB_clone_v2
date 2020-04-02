@@ -62,6 +62,11 @@ class TestState(unittest.TestCase):
         """test if dictionary works"""
         self.assertEqual('to_dict' in dir(self.state), True)
 
+    def test_file_state(self):
+        """ test if is instance"""
+        my_state = State(name="California")
+        self.assertIsInstance(my_state, State)
+
 
 if __name__ == "__main__":
     unittest.main()
