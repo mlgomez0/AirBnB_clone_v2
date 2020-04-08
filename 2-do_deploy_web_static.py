@@ -13,7 +13,7 @@ def do_deploy(archive_path):
         pre_path = archive_path.split("/")[1]
         deply_file = put(archive_path, "/tmp/")
         path_l = "/tmp/" + pre_path
-        path_r = "/data/web_static/releases/" + archive_path.split(".")[0]
+        path_r = "/data/web_static/releases/" + pre_path.split(".")[0]
         sudo("mkdir -p {:s}".format(path_r))
         sudo("tar -xzf {:s} -C {:s}".format(path_l, path_r))
         sudo("rm {:s}".format(path_l))
