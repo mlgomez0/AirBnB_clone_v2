@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """clean files in /data/web_static/releases in two servers"""
 from fabric.api import *
 import os

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """packs and distributes an archive to two web servers"""
 from fabric.api import *
 import os

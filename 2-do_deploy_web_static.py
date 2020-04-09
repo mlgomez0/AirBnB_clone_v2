@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """distributes an archive to a web servers, using the function do_deploy"""
 from fabric.api import *
 from datetime import datetime
