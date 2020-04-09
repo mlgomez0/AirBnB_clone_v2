@@ -14,4 +14,4 @@ def do_clean(number=0):
     with lcd("versions"):
         local("ls -1t | tail -n +{} | xargs rm -rf".format(number))
     with cd("/data/web_static/releases/"):
-        sudo("ls -1t -I test | tail -n +{:d} | xargs rm -rf".format(number))
+        sudo("ls -1t  | tail -n +{:d} | grep -v test | xargs rm -rf".format(number))
