@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """distributes an archive to a web servers, using the function do_deploy"""
 from fabric.api import *
-import os
+from datetime import datetime
+import os.path
 
 env.hosts = ['35.196.105.181', '3.93.188.97']
 
@@ -25,6 +26,6 @@ def do_deploy(archive_path):
         op8 = sudo("ln -s {:s} /data/web_static/current".format(path_r))
         ops = [op1, op2, op3, op4, op5, op6, op7, op8]
         print("New version deployed!")
-        return all([op.succeeded for op in ops])
+        return True
     else:
         return False
