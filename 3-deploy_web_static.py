@@ -17,6 +17,7 @@ def deploy():
     else:
         return False
 
+
 @runs_once
 def do_pack():
     local("mkdir -p versions")
