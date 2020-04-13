@@ -8,7 +8,7 @@ env.hosts = ['35.196.105.181', '3.93.188.97']
 
 def do_clean(number=0):
     """clean files"""
-    if number == 0 or number == 1:
+    if eval(number) == 0 or eval(number) == 1:
         number = 1
     number = eval(number) + 1
     with lcd("versions"):
