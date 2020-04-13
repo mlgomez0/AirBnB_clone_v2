@@ -8,9 +8,9 @@ env.hosts = ['35.196.105.181', '3.93.188.97']
 
 def do_clean(number=0):
     """clean files"""
-    if eval(number) == 0 or eval(number) == 1:
+    if int(number) == 0 or int(number) == 1:
         number = 1
-    number = eval(number) + 1
+    number = int(number) + 1
     with lcd("versions"):
         local("ls -1t | tail -n +{} | xargs rm -rf".format(number))
     with cd("/data/web_static/releases/"):
