@@ -33,7 +33,11 @@ class DBStorage:
         class_list = [User, State, City, Amenity, Place, Review]
         all_dict = {}
         if cls is not None:
-            class_obj = eval(cls)
+            if type(cls) == str:
+                class_obj = eval(cls)
+            else:
+                class_obj = cls
+                cls = str(cls)
             for item in self.__session.query(class_obj):
                 all_dict[cls + "." + item.id] = item
         else:
@@ -56,5 +60,8 @@ class DBStorage:
     def reload(self):
         Base.metadata.create_all(self.__engine)
         factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        Session = scoped_session(factory)
-        self.__session = Session()
+        self.__session = scoped_session(factory)
+
+    def close(self):
+        """call remove method"""
+        self.__session.remove()
