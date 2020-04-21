@@ -14,11 +14,16 @@ def tear_all(self):
 
 
 @app.route("/states", strict_slashes=False, defaults={'id': 0})
-@app.route("/states/<id>", strict_slashes = False)
+@app.route("/states/<id>", strict_slashes=False)
 def state_city_list(id):
     st = storage.all("State")
     cn = "States"
-    return render_template("9-states.html", states=st, class_name=cn, stateid=id)
+    stg = None
+    if id:
+        for k, v in st.items():
+            if k.split(".")[1] == id:
+                stg = v
+    return render_template("9-states.html", st=st, cn=cn, stg=stg, id=id)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
