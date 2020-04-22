@@ -25,10 +25,11 @@ button:hover {
     display: inline-grid;
 }
 .filters h2 {
-    margin-left: 15%;
+    margin-left: 1%;
     margin-top: 0;
     margin-bottom: 0;
     font-weight: 600;
+    line-height: 2.5;
 }
 .filters h3 {
     margin-left: 15%;
@@ -51,12 +52,15 @@ button:hover {
     width: 25%;
 }
 .popover {
+    height: 300px;
+    max-height: 300px;
     visibility: hidden;
     width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     background: #FAFAFA;
     padding-bottom: 25px;
+    overflow-y: scroll;
 }
 .amenities .popover {
     padding: 20px 0;
