@@ -18,7 +18,7 @@ def state_city_list():
     st = storage.all("State")
     am = storage.all("Amenity")
     pl = storage.all("Place")
-    return render_template("100-hbnb.html", states=st, ameny = am, place = pl)
+    return render_template("100-hbnb.html", states=st, ameny=am, place=pl)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)

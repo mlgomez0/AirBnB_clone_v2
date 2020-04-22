@@ -17,7 +17,7 @@ def tear_all(self):
 def state_city_list():
     st = storage.all("State")
     am = storage.all("Amenity")
-    return render_template("10-hbnb_filters.html", states=st, ameny = am)
+    return render_template("10-hbnb_filters.html", states=st, ameny=am)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
